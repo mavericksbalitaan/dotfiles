@@ -1,0 +1,6 @@
+[user]
+	name = Mavericks Balitaan
+	email = balitaanmavericks@gmail.com
+[core]
+	autocrlf = input
+	excludesfile = /Users/mavericks/.gitignore_global
