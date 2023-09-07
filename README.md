@@ -3,6 +3,18 @@
 # Steps to bootstrap a new Mac
 1. Go to Accessibility > Keyboard Settings and adjusts Key repeat rate to Fast and Delay until repeat to Short.
 
+```
+# To disable the Apple press and hold for VSCode only, run this command in a terminal:
+
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+
+# Then restart VSCode.
+
+# To re-enable, run this command in a terminal:
+
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool true
+```
+
 2. Install [Homebrew](https://brew.sh/), followed by the software listed in the Brewfile.
 ```
 # These could also be in an install script.
@@ -22,7 +34,7 @@ brew bundle dump --describe
 
 3. Clone this repo into new hidden directory.
 ```
-# Use SSH (if set up)...
+# Use SSH (if already set up)...
 git clone git@github.com:mavericks-db/dotfiles.git ~/.dotfiles
 
 # ...or use HTTPS and switch remotes later.
@@ -114,4 +126,37 @@ git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zs
 
 # zsh-autosuggestion
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
+
+# Troubleshoot:
+```
+# curl: (7) Failed to connect to raw.githubusercontent.com port 443: Connection refused
+export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:789
+
+# If you can't open Github, use the domestic brew installation script on Gitee
+/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+```
+
+# Set-up SSH key:
+```
+# Generating a SSH key in the terminal
+ssh-keygen -t ed25519 -C "balitaanmavericks@gmail.com"
+
+# Start up the ssh-agent in the background
+eval "$(ssh-agent -s)"
+
+# If not exists, create a config file
+touch ~/.ssh/config
+
+# Open the config file
+open ~/.ssh/config
+
+# Add the following lines to the config file
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519
+
+# Add your SSH private key to the ssh-agent
+ssh-add ~/.ssh/id_ed25519
 ```
